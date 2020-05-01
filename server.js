@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const hbs = require('hbs');
 const expressHbs = require('express-handlebars');
 const config = require('./config');
+const mainRoutes = require('./routes/main');
 
 const app = express();
 
@@ -17,9 +18,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res, next) => {
-  res.send('hello');
-});
+app.use(mainRoutes);
 
 app.listen(config.PORT, (err) => {
   if (err) {
