@@ -7,15 +7,13 @@ const expressHbs = require('express-handlebars');
 const session = require('express-session');
 const flash = require('express-flash');
 const MongoStore = require('connect-mongo')(session);
+const passport = require('passport');
 
 const config = require('./config');
 const app = express();
 
 const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/user');
-
-
-
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -44,6 +42,8 @@ app.use(session({
   store: new MongoStore({ url: config.mongoDB, autoReconnect: true })
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(mainRoutes);
 app.use(userRoutes);
