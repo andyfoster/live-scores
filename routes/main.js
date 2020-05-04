@@ -4,7 +4,6 @@ const User = require('../models/user');
 router.get('/', (req, res, next) => {
   if (req.user) {
     res.render('main/home');
-
   } else {
     res.render('main/landing');
 
@@ -22,8 +21,8 @@ router.get('/create-new-user', (req, res, next) => {
     res.json('Successfully created new user');
   });
 });
+
 router.get('/login', (req, res, next) => {
-  // res.send('login here');
   res.render('accounts/login');
 });
 
