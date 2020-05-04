@@ -1,6 +1,5 @@
-# Created by https://www.gitignore.io/api/node
-
-# Config File
+# Config Folder
+config/secrets.js
 config.js
 
 ### Node ###
@@ -70,5 +69,3 @@ jspm_packages/
 # Temporary folders
 tmp/
 temp/
-
-# End of https://www.gitignore.io/api/node

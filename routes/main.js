@@ -17,7 +17,8 @@ router.get('/create-new-user', (req, res, next) => {
   });
 });
 router.get('/login', (req, res, next) => {
-  res.send('login here');
+  // res.send('login here');
+  res.render('accounts/login');
 });
 
 module.exports = router;
