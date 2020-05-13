@@ -22,9 +22,15 @@ passport.use('local-login', new LocalStrategy({
   User.findOne({ email: email }, function (err, user) {
     if (err) return done(err);
 
-    if (!user) return done(null, false, req.flash('loginMessage', 'No user found'));
+    if (!user) return done(
+      null,
+      false,
+      req.flash('loginMessage', 'No user found'));
 
-    if (!user.comparePassword(password)) return done(null, false, req.flash('loginMessage', 'Incorrect password'));
+    if (!user.comparePassword(password)) return done(
+      null,
+      false,
+      req.flash('loginMessage', 'Incorrect password'));
 
     return done(null, user);
   });
