@@ -18,12 +18,16 @@ const PORT = 8080;
 const secrets = require('./config/secrets');
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 // create a write stream (in append mode)
 let accessLogStream = fs.createWriteStream(
   path.join(__dirname, 'access.log'),
   { flags: 'a' }
 );
+
+require('./realtime/io')(io);
 
 const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/user');
@@ -78,7 +82,7 @@ app.use(function (req, res, next) {
 app.use(mainRoutes);
 app.use(userRoutes);
 
-app.listen(PORT, (err) => {
+http.listen(PORT, (err) => {
   if (err) {
     console.log(err);
   } else {
