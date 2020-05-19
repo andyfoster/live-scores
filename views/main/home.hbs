@@ -9,14 +9,16 @@
   </form>
   <br />
   <div id="tweetList">
+    {{#each tweets}}
     <div class="media">
       <div class="media-left">
-        <a href=""><img src="{{ user.photo }}" alt="" class="media-object"></a>
+        <a href=""><img src="{{ owner.photo }}" alt="" class="media-object"></a>
       </div>
       <div class="media-body">
-        <h4 class="media-heading">{{ user.name }} </h4>
-        <p>Hello</p>
+        <h4 class="media-heading">{{owner.name}}</h4>
+        <p>{{ content }}</p>
       </div>
     </div>
+    {{/each}}
   </div>
 </div>
