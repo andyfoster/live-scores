@@ -8,9 +8,9 @@ const UserSchema = new Schema({
   name: String,
   password: String,
   photo: String,
-  posts: [{
-    post: { type: Schema.Types.ObjectId, ref: 'Post' }
-  }]
+  tweets: [{
+    tweet: { type: Schema.Types.ObjectId, ref: 'Tweet' }
+  }],
 });
 
 UserSchema.pre('save', function (next) {

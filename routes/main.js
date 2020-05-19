@@ -6,7 +6,6 @@ router.get('/', (req, res, next) => {
     res.render('main/home');
   } else {
     res.render('main/landing');
-
   }
 });
 

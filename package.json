@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.3",
+    "async": "^3.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
@@ -25,6 +27,7 @@
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "passport.socketio": "^3.7.0",
     "socket.io": "^2.3.0"
   }
 }
