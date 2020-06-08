@@ -12,10 +12,10 @@
     {{#each tweets}}
     <div class="media">
       <div class="media-left">
-        <a href=""><img src="{{ owner.photo }}" alt="" class="media-object"></a>
+        <a href="/user/{{ owner._id }}"><img src="{{ owner.photo }}" alt="" class="media-object"></a>
       </div>
       <div class="media-body">
-        <h4 class="media-heading">{{owner.name}}</h4>
+        <h4 class="media-heading">{{ owner.name }}</h4>
         <p>{{ content }}</p>
       </div>
     </div>

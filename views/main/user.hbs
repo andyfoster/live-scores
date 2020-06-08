@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+
+      <div class="starter-template">
+        <h2>{{ foundUser.name }}</h2>
+        <img src="{{foundUser.photo }}" alt="" class="photo-size">
+        <div class="mt-3">
+          <a href="" class="btn btn-primary" id="follow">Follow</a>
+
+        </div>
+      </div>
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Tweets</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu1">Followers</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#menu2">Following</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade-in active">
+          {{#each tweets}}
+          <div class="media">
+            <div class="media-left">
+              <a href="/user/{{ owner._id }}"><img src="{{ owner.photo }}" alt="" class="media-object"></a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">{{ owner.name }}</h4>
+              <p>{{ content }}</p>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <div id="menu1" class="tab-pane fade">
+          {{#each foundUser.following }}
+          <div class="media">
+            <div class="media-left">
+              <a href=""><img src="{{ photo }}" alt="" class="media-object"></a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">{{ name }}</h4>
+            </div>
+          </div>
+          {{/each}}
+
+        </div>
+        <div id="menu2" class="tab-pane fade">
+          {{#each foundUser.following}}
+          <div class="media">
+            <div class="media-left">
+              <a href=""><img src="{{ photo }}" alt="" class="media-object"></a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">{{ name }}</h4>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
