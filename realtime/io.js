@@ -1,20 +1,18 @@
-const async = require('async');
-const Tweet = require('../models/tweet');
-const User = require('../models/user');
+const async = require("async");
+const Tweet = require("../models/tweet");
+const User = require("../models/user");
 
 module.exports = function (io) {
-
-  io.on('connection', function (socket) {
-    console.log('connected to socket (io.js: 4)');
+  io.on("connection", function (socket) {
+    console.log("connected to socket (io.js: 4)");
     let user = socket.request.user;
     console.log(user.name);
 
-    socket.on('tweet', (data) => {
-      if (data.content == '') return false;
+    socket.on("tweet", (data) => {
+      if (data.content == "") return false;
       async.parallel([
         function (callback) {
-          io.emit('incomingTweets', { data, user });
-
+          io.emit("incomingTweets", { data, user });
         },
         function (callback) {
           async.waterfall([
@@ -25,24 +23,27 @@ module.exports = function (io) {
               tweet.save(function (err) {
                 callback(err, tweet);
                 if (err) return err;
-                console.log('success');
+                console.log("success");
               });
             },
             function (tweet, callback) {
-              User.updateOne({
-                _id: user._id
-              }, {
-                $push: {
-                  tweets: { tweet: tweet._id }
+              User.updateOne(
+                {
+                  _id: user._id,
+                },
+                {
+                  $push: {
+                    tweets: { tweet: tweet._id },
+                  },
+                },
+                function (err, count) {
+                  callback(err, count);
                 }
-              }, function (err, count) {
-                callback(err, count);
-              });
+              );
             },
-          ]);
-        }
-      ]);
-
-    });
-  });
-};
+          ]); // async.waterfall
+        },
+      ]); // async.parallel
+    }); // socket.on('tweet')
+  }); // io.on
+}; // module.exports(io)
