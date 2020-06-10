@@ -48,7 +48,17 @@ router.get('/user/:id', (req, res, next) => {
         .populate('following')
         .populate('followers')
         .exec(function (err, user) {
-          res.render('main/user', { foundUser: user, tweets: tweets });
+          var currentUser;
+          if (req.user._id.equals(user._id)) {
+            currentUser = true;
+          } else {
+            currentUser = false;
+          }
+          res.render('main/user', {
+            foundUser: user,
+            tweets: tweets,
+            currentUser: currentUser,
+          });
         });
     },
   ]);

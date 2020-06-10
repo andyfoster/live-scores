@@ -6,9 +6,10 @@
         <h2>{{ foundUser.name }}</h2>
         <img src="{{foundUser.photo }}" alt="" class="photo-size">
         <div class="mt-3">
+          {{#unless currentUser}}
           <input type="hidden" name="user_id" id="user_id" value="{{ foundUser._id }}">
           <button class="btn btn-primary" id="follow">Follow</button>
-
+          {{/unless }}
         </div>
       </div>
 
