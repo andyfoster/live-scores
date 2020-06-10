@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const async = require("async");
-const User = require("../models/user");
-const Tweet = require("../models/tweet");
+const router = require('express').Router();
+const async = require('async');
+const User = require('../models/user');
+const Tweet = require('../models/tweet');
 
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
   if (req.user) {
     /**
      * app.get('/test', function (_req, res) {
@@ -16,28 +16,28 @@ router.get("/", (req, res, next) => {
      */
 
     Tweet.find({})
-      .sort("-created")
+      .sort('-created')
       .lean()
-      .populate("owner")
+      .populate('owner')
       .exec(function (err, tweets) {
         if (err) return next(err);
         console.log(tweets);
-        res.render("main/home", { tweets: tweets });
+        res.render('main/home', { tweets: tweets });
         // res.render('main/home', {
         //   tweets: tweets.map(tweet => tweet.toJSON()) // TESTING! Wed 20 May
         // });
       });
   } else {
-    res.render("main/landing");
+    res.render('main/landing');
   }
 });
 
-router.get("/user/:id", (req, res, next) => {
+router.get('/user/:id', (req, res, next) => {
   async.waterfall([
     function (callback) {
       Tweet.find({ owner: req.params.id })
         .lean()
-        .populate("owner")
+        .populate('owner')
         .exec(function (err, tweets) {
           callback(err, tweets);
         });
@@ -45,16 +45,16 @@ router.get("/user/:id", (req, res, next) => {
     function (tweets, callback) {
       User.findOne({ _id: req.params.id })
         .lean()
-        .populate("following")
-        .populate("followers")
+        .populate('following')
+        .populate('followers')
         .exec(function (err, user) {
-          res.render("main/user", { foundUser: user, tweets: tweets });
+          res.render('main/user', { foundUser: user, tweets: tweets });
         });
     },
   ]);
 });
 
-router.post("/follow/:id", (req, res, next) => {
+router.post('/follow/:id', (req, res, next) => {
   async.parallel(
     [
       function (callback) {
@@ -88,25 +88,25 @@ router.post("/follow/:id", (req, res, next) => {
     ],
     function (err, results) {
       if (err) return next(err);
-      res.json("success");
+      res.json('Success in the follow route!');
     }
   );
 });
 
-router.get("/create-new-user", (req, res, next) => {
+router.get('/create-new-user', (req, res, next) => {
   // res.send('signup here')
   var user = new User();
-  user.email = "todd@email.com";
-  user.name = "Todd";
-  user.password = "123123";
+  user.email = 'todd@email.com';
+  user.name = 'Todd';
+  user.password = '123123';
   user.save(function (err) {
     if (err) return next(err);
-    res.json("Successfully created new user");
+    res.json('Successfully created new user');
   });
 });
 
-router.get("/login", (req, res, next) => {
-  res.render("accounts/login");
+router.get('/login', (req, res, next) => {
+  res.render('accounts/login');
 });
 
 module.exports = router;

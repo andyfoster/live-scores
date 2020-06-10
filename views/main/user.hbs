@@ -6,7 +6,8 @@
         <h2>{{ foundUser.name }}</h2>
         <img src="{{foundUser.photo }}" alt="" class="photo-size">
         <div class="mt-3">
-          <a href="" class="btn btn-primary" id="follow">Follow</a>
+          <input type="hidden" name="user_id" id="user_id" value="{{ foundUser._id }}">
+          <button class="btn btn-primary" id="follow">Follow</button>
 
         </div>
       </div>
@@ -32,20 +33,20 @@
           {{/each}}
         </div>
         <div id="menu1" class="tab-pane fade">
-          {{#each foundUser.following }}
+          {{#each foundUser.followers }}
           <div class="media">
             <div class="media-left">
-              <a href=""><img src="{{ photo }}" alt="" class="media-object"></a>
+              <a href="/user/{{ _id }}"><img src="{{ photo }}" alt="" class="media-object"></a>
             </div>
             <div class="media-body">
               <h4 class="media-heading">{{ name }}</h4>
             </div>
           </div>
           {{/each}}
-
         </div>
+
         <div id="menu2" class="tab-pane fade">
-          {{#each foundUser.follows}}
+          {{#each foundUser.following }}
           <div class="media">
             <div class="media-left">
               <a href=""><img src="{{ photo }}" alt="" class="media-object"></a>
